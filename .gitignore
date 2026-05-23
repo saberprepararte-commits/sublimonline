@@ -1,0 +1,10 @@
+# Sistema operativo
+Thumbs.db
+Desktop.ini
+
+# Archivos temporales
+*.tmp
+*.log
+
+# Paquetes comprimidos generados localmente
+*.zip

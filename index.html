@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sublimo Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <span class="brand-mark">
+          <img src="./sublimo-logo.png" alt="" />
+        </span>
+        <span>
+          <strong id="storeNameLabel">Sublimo Shop</strong>
+          <small id="storeTaglineLabel">Productos seleccionados</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegacion principal">
+        <a href="#catalogo">Cat&aacute;logo</a>
+      </nav>
+
+      <div class="top-actions">
+        <button class="style-switch" id="themeToggle" type="button" aria-label="Cambiar estilo visual" title="Switch de estilo">
+          <span data-icon="palette"></span>
+          <span>
+            <small>Switch</small>
+            <strong id="themeLabel">Urbano</strong>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero hero-banner" id="inicio" aria-label="Portada">
+        <div class="hero-media">
+          <picture>
+            <source media="(max-width: 720px)" srcset="./hero-sublimo-mobile.png" />
+            <img src="./hero-sublimo.png" alt="Banner de Sublimo con camisetas personalizadas" />
+          </picture>
+        </div>
+        <div class="hero-content">
+          <p class="eyebrow">Cat&aacute;logo visual</p>
+          <h1 id="heroTitle">Sublimo Shop</h1>
+          <p id="heroCopy">Explora productos, revisa detalles y consulta disponibilidad por WhatsApp.</p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#catalogo">
+              <span data-icon="grid"></span>
+              Ver cat&aacute;logo
+            </a>
+            <button class="secondary-link" id="heroWhatsapp" type="button">
+              <span data-icon="message-circle"></span>
+              WhatsApp
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="promo-banner" id="promoBanner" aria-label="Promoci&oacute;n destacada" hidden>
+        <button class="promo-close" id="promoClose" type="button" aria-label="Cerrar promoci&oacute;n" title="Cerrar">
+          <span data-icon="x"></span>
+        </button>
+        <div class="promo-copy">
+          <p class="eyebrow">Promoci&oacute;n destacada</p>
+          <h2>Dise&ntilde;os destacados para esta semana</h2>
+          <p>Una selecci&oacute;n especial de camisetas listas para personalizar o pedir por WhatsApp.</p>
+          <a class="primary-link" id="promoWhatsapp" href="#" target="_blank" rel="noopener">
+            <span data-icon="message-circle"></span>
+            Consultar promoci&oacute;n
+          </a>
+        </div>
+        <div class="promo-carousel" aria-label="Productos destacados">
+          <button class="carousel-button carousel-prev" id="promoPrev" type="button" aria-label="Ver destacados anteriores">
+            <span data-icon="chevron-left"></span>
+          </button>
+          <div class="promo-products" id="promoProducts"></div>
+          <button class="carousel-button carousel-next" id="promoNext" type="button" aria-label="Ver m&aacute;s destacados">
+            <span data-icon="chevron-right"></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="catalog-section" id="catalogo">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Productos</p>
+            <h2>Galer&iacute;a</h2>
+          </div>
+          <div class="catalog-tools">
+            <label class="search-box">
+              <span data-icon="search"></span>
+              <input id="searchInput" type="search" placeholder="Buscar producto" autocomplete="off" />
+            </label>
+            <select id="categoryFilter" aria-label="Filtrar por categor&iacute;a">
+              <option value="all">Todas</option>
+            </select>
+            <select id="sortFilter" aria-label="Ordenar productos">
+              <option value="recent">M&aacute;s recientes</option>
+              <option value="featured">Destacados</option>
+              <option value="price-asc">Menor precio</option>
+              <option value="price-desc">Mayor precio</option>
+              <option value="name">Nombre A-Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="category-chips" id="categoryChips" aria-label="Categor&iacute;as r&aacute;pidas"></div>
+        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+        <p class="empty-state" id="emptyState" hidden>No hay productos para mostrar.</p>
+        <div class="load-more-row">
+          <p id="resultCount" aria-live="polite"></p>
+          <button class="primary-button load-more-button" id="loadMoreButton" type="button" hidden>
+            Ver m&aacute;s productos
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <span id="footerStoreName">Sublimo Shop</span>
+      <a class="admin-footer-link" href="admin.html">Admin</a>
+    </footer>
+
+    <div class="quick-view" id="quickView" hidden>
+      <div class="quick-view-backdrop" data-close-quick-view></div>
+      <section class="quick-view-panel" role="dialog" aria-modal="true" aria-labelledby="quickViewTitle">
+        <button class="quick-view-close" type="button" aria-label="Cerrar vista r&aacute;pida" data-close-quick-view>
+          <span data-icon="x"></span>
+        </button>
+        <div class="quick-view-media">
+          <img id="quickViewImage" src="" alt="" />
+        </div>
+        <div class="quick-view-content">
+          <div class="quick-view-meta">
+            <span id="quickViewCategory"></span>
+            <span id="quickViewStatus"></span>
+          </div>
+          <h2 id="quickViewTitle"></h2>
+          <p id="quickViewDescription"></p>
+          <strong id="quickViewPrice"></strong>
+          <a class="primary-link quick-view-whatsapp" id="quickViewWhatsapp" href="#" target="_blank" rel="noopener">
+            <span data-icon="message-circle"></span>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="app-public.js"></script>
+  </body>
+</html>

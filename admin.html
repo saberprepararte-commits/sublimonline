@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administraci&oacute;n | Sublimo Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Ir a la tienda">
+        <span class="brand-mark">
+          <img src="./sublimo-logo.png" alt="" />
+        </span>
+        <span>
+          <strong>Sublimo Shop</strong>
+          <small>Panel privado</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegacion principal">
+        <a href="index.html#catalogo">Cat&aacute;logo</a>
+      </nav>
+
+      <div class="top-actions">
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+          <span data-icon="moon"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="admin-page">
+      <section class="admin-section" id="admin" aria-label="Administraci&oacute;n">
+        <div class="admin-shell">
+          <aside class="admin-summary">
+            <div class="admin-title">
+              <p class="eyebrow">Panel privado</p>
+              <h1>Administraci&oacute;n</h1>
+            </div>
+            <div class="metric-row">
+              <div>
+                <strong id="totalProducts">0</strong>
+                <span>Productos</span>
+              </div>
+              <div>
+                <strong id="totalFeatured">0</strong>
+                <span>Destacados</span>
+              </div>
+            </div>
+            <button class="danger-button" id="logoutButton" type="button" hidden>
+              <span data-icon="log-out"></span>
+              Salir
+            </button>
+          </aside>
+
+          <form class="admin-panel auth-panel" id="loginForm">
+            <span class="panel-icon" data-icon="lock"></span>
+            <h2>Acceso requerido</h2>
+            <label>
+              Correo
+              <input id="emailInput" type="email" autocomplete="email" required />
+            </label>
+            <label>
+              Contrase&ntilde;a
+              <input id="passwordInput" type="password" autocomplete="current-password" required />
+            </label>
+            <p class="form-error" id="loginError" hidden>No se pudo iniciar sesi&oacute;n.</p>
+            <button class="primary-button" type="submit">Entrar</button>
+          </form>
+
+          <div class="admin-workspace" id="adminWorkspace" hidden>
+            <div class="admin-left-column">
+            <form class="settings-form" id="settingsForm">
+              <h2>Datos de la tienda</h2>
+              <div class="form-grid">
+                <label>
+                  Nombre
+                  <input id="storeName" type="text" maxlength="40" required />
+                </label>
+                <label>
+                  WhatsApp
+                  <input id="whatsappNumber" type="tel" placeholder="3126611414" required />
+                </label>
+                <label class="span-2">
+                  Frase
+                  <input id="storeTagline" type="text" maxlength="80" required />
+                </label>
+              </div>
+              <button class="primary-button" type="submit">
+                <span data-icon="save"></span>
+                Guardar tienda
+              </button>
+            </form>
+
+            <form class="settings-form" id="productForm">
+              <div class="form-title-row">
+                <h2 id="formTitle">Agregar producto</h2>
+                <button class="ghost-button" id="resetFormButton" type="button">
+                  <span data-icon="plus"></span>
+                  Nuevo
+                </button>
+              </div>
+              <input id="productId" type="hidden" />
+              <div class="form-grid">
+                <label>
+                  Producto
+                  <input id="productName" type="text" maxlength="80" required />
+                </label>
+                <label>
+                  Categor&iacute;a
+                  <input id="productCategory" type="text" maxlength="40" required />
+                </label>
+                <label>
+                  Precio
+                  <input id="productPrice" type="text" maxlength="30" placeholder="$ 0" required />
+                </label>
+                <label>
+                  Estado
+                  <select id="productStatus">
+                    <option value="Disponible">Disponible</option>
+                    <option value="Por encargo">Por encargo</option>
+                    <option value="Agotado">Agotado</option>
+                  </select>
+                </label>
+                <label class="span-2">
+                  Imagen
+                  <input id="productImage" type="url" placeholder="https://... o enlace compartido de Google Drive" required />
+                </label>
+                <label class="span-2">
+                  Detalle
+                  <textarea id="productDescription" rows="3" maxlength="220" required></textarea>
+                </label>
+                <label class="check-row span-2">
+                  <input id="productFeatured" type="checkbox" />
+                  <span>Destacado</span>
+                </label>
+              </div>
+              <button class="primary-button" type="submit">
+                <span data-icon="save"></span>
+                Guardar producto
+              </button>
+            </form>
+
+            <section class="settings-form csv-import-panel" aria-label="Carga masiva por Excel">
+              <h2>Carga masiva Excel</h2>
+              <p class="helper-text">Descarga la plantilla, llena tus productos en Excel y luego importa el archivo para cargarlos en bloque.</p>
+              <div class="csv-actions">
+                <button class="ghost-button" id="downloadCsvTemplate" type="button">
+                  <span data-icon="download"></span>
+                  Descargar plantilla Excel
+                </button>
+                <label class="ghost-button csv-file-trigger" for="csvFileInput">
+                  <span data-icon="upload"></span>
+                  Seleccionar Excel
+                </label>
+                <input id="csvFileInput" type="file" accept=".xlsx,.xls,.csv,text/csv" hidden />
+                <button class="primary-button" id="importCsvButton" type="button" disabled>
+                  <span data-icon="save"></span>
+                  Importar productos
+                </button>
+              </div>
+              <p class="csv-summary" id="csvSummary">Sin archivo seleccionado.</p>
+              <div class="csv-preview" id="csvPreview" hidden>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Producto</th>
+                      <th>Categor&iacute;a</th>
+                      <th>Precio</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody id="csvPreviewRows"></tbody>
+                </table>
+              </div>
+            </section>
+            </div>
+
+            <div class="admin-right-column">
+            <section class="admin-organizer" aria-label="Organizar productos">
+              <div>
+                <p class="eyebrow">Inventario</p>
+                <h2>Organizar productos</h2>
+              </div>
+              <div class="admin-filter-grid">
+                <label>
+                  Buscar
+                  <input id="adminProductSearch" type="search" placeholder="Nombre o detalle" />
+                </label>
+                <label>
+                  Categor&iacute;a
+                  <select id="adminCategoryFilter">
+                    <option value="Todas">Todas</option>
+                  </select>
+                </label>
+                <label>
+                  Estado
+                  <select id="adminStatusFilter">
+                    <option value="Todos">Todos</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="Por encargo">Por encargo</option>
+                    <option value="Agotado">Agotado</option>
+                  </select>
+                </label>
+              </div>
+              <div class="admin-table-meta">
+                <span id="adminResultCount">0 productos</span>
+                <div class="admin-pagination">
+                  <button class="icon-button" id="adminPrevPage" type="button" aria-label="Pagina anterior" title="Pagina anterior">
+                    <span data-icon="chevron-left"></span>
+                  </button>
+                  <span id="adminPageLabel">P&aacute;gina 1 de 1</span>
+                  <button class="icon-button" id="adminNextPage" type="button" aria-label="Pagina siguiente" title="Pagina siguiente">
+                    <span data-icon="chevron-right"></span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <div class="bulk-actions">
+              <label class="select-all-row">
+                <input id="selectAllProducts" type="checkbox" />
+                <span>Seleccionar p&aacute;gina</span>
+              </label>
+              <button class="danger-button compact-button" id="deleteSelectedProducts" type="button" disabled>
+                <span data-icon="trash-2"></span>
+                Eliminar seleccionados
+              </button>
+              <span class="bulk-count" id="selectedProductsCount">0 seleccionados</span>
+            </div>
+
+            <div class="product-table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="select-column" aria-label="Seleccionar"></th>
+                    <th>Producto</th>
+                    <th>Categor&iacute;a</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductRows"></tbody>
+              </table>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="vendor/xlsx.full.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin-supabase.js"></script>
+  </body>
+</html>
